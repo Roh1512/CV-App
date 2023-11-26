@@ -36,6 +36,13 @@
 .card {
   padding: 2em;
 }
+#card {
+  background-color: #242424;
+  width: 100%;
+  margin: auto;
+  margin: 0;
+  padding: 0;
+}
 
 .read-the-docs {
   color: #888;
