@@ -1,12 +1,12 @@
+import { DownloadImage, DownloadPDF } from "./downloadFiles";
 export default function TopNav() {
   return (
     <>
       <nav className="navBar">
-        <a href="#">
-          <div className="logoDiv">
-            <h1 className="logoText">CV Generator</h1>
-          </div>
-        </a>
+        <div className="downloadBtns">
+          <DownloadImage divId={"CVdisplay"} fileName={"CV Image"} />
+          <DownloadPDF divId={"CVdisplay"} fileName={"CV Image"} />
+        </div>
       </nav>
     </>
   );

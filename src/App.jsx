@@ -1,6 +1,5 @@
 import { useState } from "react";
 import cvicon from "/cvicon.svg";
-import { DownloadImage, DownloadPDF } from "./downloadFiles";
 
 import "./App.css";
 import TopNav from "./TopNav";

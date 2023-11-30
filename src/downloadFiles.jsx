@@ -26,7 +26,7 @@ function DownloadPDF({ divId, fileName }) {
   return (
     <button
       type="button"
-      className="downloadBtn"
+      className="btn btn-success"
       onClick={() => downloadPDF(divId, fileName)}
     >
       Download PDF
@@ -54,7 +54,7 @@ function DownloadImage({ divId, fileName }) {
   }
   return (
     <button
-      className="downloadBtn"
+      className="btn btn-success"
       onClick={() => downloadImage(divId, fileName)}
     >
       Download Image
