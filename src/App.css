@@ -164,22 +164,26 @@ fieldset {
   margin: 20px 0;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .displayGrid {
   display: grid;
+  grid-template-columns: 1fr 2fr;
   width: 100%;
   align-items: center;
   justify-items: center;
   justify-content: center;
-  grid-template-columns: 1fr 2fr;
   padding: 10px 0;
   gap: 10px;
   margin: 20px 0;
   color: black;
+  text-align: center;
 }
 .displayGridLeft {
   grid-row: 1/3;
+  text-align: center;
 }
 
 .displayHeading {

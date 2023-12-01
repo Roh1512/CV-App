@@ -1,6 +1,3 @@
-import gmailIcon from "./assets/gmail.svg";
-import phoneIcon from "./assets/telephone.svg";
-import websiteIcon from "./assets/website.svg";
 export default function CVDisplay({ cvDetails }) {
   return (
     <>
