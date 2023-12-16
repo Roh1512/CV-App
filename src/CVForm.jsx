@@ -353,7 +353,7 @@ function ListDiv({ details, onClick, displayProp }) {
     <>
       {details.map((detail) => (
         <div key={detail.id} className="detailsBtn">
-          <h4>{detail[displayProp]}</h4>
+          <h4 className="listDisplayText">{detail[displayProp]}</h4>
           <button onClick={() => onClick(detail.id)} className="btn btn-danger">
             <i className="bi bi-x-circle"></i>
           </button>

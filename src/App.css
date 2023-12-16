@@ -115,6 +115,7 @@ fieldset {
   width: 100%;
   min-height: 700px;
   max-height: min-content;
+  max-width: 896px;
   background-color: var(--cvDisplayBG);
   color: var(--cvDisplayColor);
 }
@@ -163,11 +164,16 @@ fieldset {
   border-radius: 10px;
   margin-bottom: 10px;
   padding: 5px 10px;
-  width: fit-content;
+  width: 60%;
+  overflow: hidden;
   height: fit-content;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   font-size: 16px;
+}
+.listDisplayText {
+  overflow: hidden;
+  width: 60%;
 }
 
 .bi-x-circle {
@@ -207,7 +213,7 @@ fieldset {
 .individualGrid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 0.2rem;
+  gap: 1rem;
   border-bottom: 1px solid var(--cvDisplayColor);
   width: 90%;
 }
@@ -223,6 +229,13 @@ fieldset {
   overflow: hidden; /* Hide overflow content */
   word-wrap: break-word; /* Break words when necessary */
 }
+.mainProperty,
+.prop2,
+.prop3,
+.dates {
+  word-wrap: break-word;
+  word-break: break-all;
+}
 
 .skillsDiv {
   display: flex;
@@ -234,6 +247,7 @@ fieldset {
   margin: 0 auto;
   width: 100%;
   text-align: center;
+  margin-bottom: 5rem;
 }
 .skillListContainer {
   display: flex;
