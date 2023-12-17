@@ -11,6 +11,7 @@
   --cvFormColor: black;
   --navBarColor: black;
   --cvDisplayBG: rgb(255, 255, 255);
+  --cvDisplayBodyColor: black;
   --cvDisplayColor: #0e374e;
   --personeldetailsBG: #0e374e;
   --personeldetailsColor: rgb(255, 255, 255);
@@ -118,6 +119,8 @@ fieldset {
   max-width: 896px;
   background-color: var(--cvDisplayBG);
   color: var(--cvDisplayColor);
+  word-wrap: break-word;
+  overflow: hidden;
 }
 
 .personeldetails {
@@ -177,16 +180,17 @@ fieldset {
 }
 
 .bi-x-circle {
-  font-size: 20px;
+  color: red;
 }
-.btn-danger {
-  padding: 0 5px;
+.listBtn {
+  padding: 0;
   min-height: fit-content;
-  background-color: transparent;
-  background-color: red;
-  color: white;
+  background: transparent;
+  border: none;
   margin-left: 10px;
   border-radius: 50%;
+  font-size: 1.4rem;
+  font-weight: 600;
 }
 
 .details {
@@ -223,18 +227,16 @@ fieldset {
 }
 .prop3 {
   grid-column: 1 / span 3;
-}
-.individualGrid > p {
-  font-size: 1.2rem;
-  overflow: hidden; /* Hide overflow content */
-  word-wrap: break-word; /* Break words when necessary */
+  margin-top: -20px;
 }
 .mainProperty,
 .prop2,
 .prop3,
 .dates {
   word-wrap: break-word;
-  word-break: break-all;
+  font-weight: 600;
+  color: var(--cvDisplayBodyColor);
+  font-size: 1.2rem;
 }
 
 .skillsDiv {
@@ -257,4 +259,8 @@ fieldset {
   font-size: 1.2em;
   font-weight: 600;
   margin: 0 2rem;
+}
+.btn {
+  font-weight: 600;
+  font-size: 1.2rem;
 }

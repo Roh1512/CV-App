@@ -91,13 +91,13 @@ function Details({ details, heading, mainProp, prop2, prop3 }) {
           return (
             <>
               <div key={detail.id} className="individualGrid">
-                <h3 className="mainProperty">{detail[mainProp]}</h3>
-                <h4 className="prop2">{detail[prop2]}</h4>
+                <p className="mainProperty">{detail[mainProp]}</p>
+                <p className="prop2">{detail[prop2]}</p>
                 <p className="prop3">{detail[prop3]}</p>
                 <p className="dates">
                   From{" "}
                   <b>
-                    <em>{detail["dateStarted"]}</em>
+                    <em>{detail["dateStarted"]}</em> {/*Comment*/}
                   </b>{" "}
                   to{" "}
                   <b>

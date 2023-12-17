@@ -6,6 +6,7 @@ export default function CVForm() {
   const [showEducationForm, setShowEducationForm] = useState(false);
   const [showExperienceForm, setShowExperienceForm] = useState(false);
   const [showSkillForm, setShowSkillForm] = useState(false);
+  const [edit, setEdit] = useState(false);
   const cvState = useCvState();
   const dispatch = useCvDispatch();
 
@@ -66,6 +67,13 @@ export default function CVForm() {
   function deleteSkill(skillId) {
     dispatch({ type: "delete-Skill", id: skillId });
   }
+  function editItem(id, property) {
+    dispatch({
+      type: "edit",
+      id: id,
+      property: property,
+    });
+  }
 
   return (
     <div className="cvFormDiv">
@@ -111,6 +119,7 @@ export default function CVForm() {
           onSubmit={(e) => {
             e.preventDefault();
             addEducation();
+            setEdit(false);
           }}
         >
           <fieldset>
@@ -119,7 +128,11 @@ export default function CVForm() {
               <button
                 type="button"
                 className="formExpandBtn"
-                onClick={() => setShowEducationForm(!showEducationForm)}
+                onClick={() => {
+                  setShowEducationForm(!showEducationForm);
+                  setShowExperienceForm(false);
+                  setShowSkillForm(false);
+                }}
               >
                 {showEducationForm ? (
                   <i className="bi bi-arrow-up-circle-fill"></i>
@@ -154,19 +167,34 @@ export default function CVForm() {
                 <Input
                   handleChange={updateEducation}
                   prop={"dateStarted"}
-                  type={"date"}
-                  placeHolder={"Date Started"}
-                  value={cvState.newEducation.dateStarted}
+                  type={"month"}
+                  placeHolder={"Year Started"}
+                  value={
+                    cvState.newEducation.dateStarted !== "" &&
+                    cvState.newEducation.dateStarted !== null &&
+                    cvState.newEducation.dateStarted !== undefined
+                      ? cvState.newEducation.dateStarted
+                      : "2018-08"
+                  }
                 />
                 <Input
                   handleChange={updateEducation}
                   prop={"dateEnded"}
-                  type={"date"}
-                  placeHolder={"Date of graduation"}
-                  value={cvState.newEducation.dateEnded}
+                  type={"month"}
+                  placeHolder={"Year of graduation"}
+                  value={
+                    (cvState.newEducation.dateEnded !== "") &
+                      (cvState.newEducation.dateEnded !== null) &&
+                    cvState.newEducation.dateEnded !== undefined
+                      ? cvState.newEducation.dateEnded
+                      : "2020-03"
+                  }
                 />
-                <button type="submit" className="btn btn-primary">
-                  Add Education
+                <button
+                  type="submit"
+                  className={!edit ? "btn btn-primary" : "btn btn-success"}
+                >
+                  {!edit ? "Add Education" : "Save changes"}
                 </button>
               </>
             )}
@@ -176,7 +204,9 @@ export default function CVForm() {
           <ListDiv
             details={cvState.cvDetails.education}
             onClick={deleteEducation}
+            onEdit={(id) => editItem(id, "education")}
             displayProp={"course"}
+            setEdit={setEdit}
           />
         )}
       </div>
@@ -187,6 +217,7 @@ export default function CVForm() {
           onSubmit={(e) => {
             e.preventDefault();
             addExperience();
+            setEdit(false);
           }}
         >
           <fieldset>
@@ -195,7 +226,11 @@ export default function CVForm() {
               <button
                 type="button"
                 className="formExpandBtn"
-                onClick={() => setShowExperienceForm(!showExperienceForm)}
+                onClick={() => {
+                  setShowExperienceForm(!showExperienceForm);
+                  setShowEducationForm(false);
+                  setShowSkillForm(false);
+                }}
               >
                 {showExperienceForm ? (
                   <i className="bi bi-arrow-up-circle-fill"></i>
@@ -229,19 +264,34 @@ export default function CVForm() {
                 <Input
                   handleChange={updateExperience}
                   prop={"dateStarted"}
-                  type={"date"}
-                  placeHolder={"Date Joined"}
-                  value={cvState.newExperience.dateStarted}
+                  type={"month"}
+                  placeHolder={"Year Joined"}
+                  value={
+                    cvState.newExperience.dateStarted !== "" &&
+                    cvState.newExperience.dateStarted !== null &&
+                    cvState.newExperience.dateStarted !== undefined
+                      ? cvState.newExperience.dateStarted
+                      : "2015-07"
+                  }
                 />
                 <Input
                   handleChange={updateExperience}
                   prop={"dateEnded"}
-                  type={"date"}
-                  placeHolder={"Date Resigned"}
-                  value={cvState.newExperience.dateEnded}
+                  type={"month"}
+                  placeHolder={"Year Resigned"}
+                  value={
+                    cvState.newExperience.dateEnded !== "" &&
+                    cvState.newExperience.dateEnded !== null &&
+                    cvState.newExperience.dateEnded !== undefined
+                      ? cvState.newExperience.dateEnded
+                      : "2018-05"
+                  }
                 />
-                <button type="submit" className="btn btn-primary">
-                  Add Experience
+                <button
+                  type="submit"
+                  className={!edit ? "btn btn-primary" : "btn btn-success"}
+                >
+                  {!edit ? "Add Experience" : "Save changes"}
                 </button>
               </>
             )}
@@ -251,7 +301,9 @@ export default function CVForm() {
           <ListDiv
             details={cvState.cvDetails.experience}
             onClick={deleteExperience}
+            onEdit={(id) => editItem(id, "experience")}
             displayProp={"company"}
+            setEdit={setEdit}
           />
         )}
       </div>
@@ -262,6 +314,7 @@ export default function CVForm() {
           onSubmit={(e) => {
             e.preventDefault();
             addSkill();
+            setEdit(false);
           }}
         >
           <fieldset>
@@ -270,7 +323,11 @@ export default function CVForm() {
               <button
                 type="button"
                 className="formExpandBtn"
-                onClick={() => setShowSkillForm(!showSkillForm)}
+                onClick={() => {
+                  setShowSkillForm(!showSkillForm);
+                  setShowEducationForm(false);
+                  setShowExperienceForm(false);
+                }}
               >
                 {showSkillForm ? (
                   <i className="bi bi-arrow-up-circle-fill"></i>
@@ -288,8 +345,11 @@ export default function CVForm() {
                   handleChange={updateSkill}
                   placeHolder={"Add a skill"}
                 />
-                <button type="submit" className="btn btn-primary">
-                  Add Skill
+                <button
+                  type="submit"
+                  className={!edit ? "btn btn-primary" : "btn btn-success"}
+                >
+                  {!edit ? "Add Skill" : "Save changes"}
                 </button>
               </>
             )}
@@ -299,7 +359,9 @@ export default function CVForm() {
           <ListDiv
             details={cvState.cvDetails.skills}
             onClick={deleteSkill}
+            onEdit={(id) => editItem(id, "skills")}
             displayProp={"text"}
+            setEdit={setEdit}
           />
         )}
       </div>
@@ -348,15 +410,26 @@ function TextArea({ handleChange, prop, placeHolder, pattern, value }) {
     </>
   );
 }
-function ListDiv({ details, onClick, displayProp }) {
+function ListDiv({ details, onClick, displayProp, onEdit, setEdit }) {
   return (
     <>
       {details.map((detail) => (
         <div key={detail.id} className="detailsBtn">
           <h4 className="listDisplayText">{detail[displayProp]}</h4>
-          <button onClick={() => onClick(detail.id)} className="btn btn-danger">
-            <i className="bi bi-x-circle"></i>
-          </button>
+          <div className="listButtons">
+            <button
+              onClick={() => {
+                onEdit(detail.id);
+                setEdit(true);
+              }}
+              className="listBtn"
+            >
+              <i className="bi bi-pen"></i>
+            </button>
+            <button onClick={() => onClick(detail.id)} className="listBtn">
+              <i className="bi bi-x-circle"></i>
+            </button>
+          </div>
         </div>
       ))}
     </>

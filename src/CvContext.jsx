@@ -84,18 +84,44 @@ export default function cvReducer(cvState, action) {
       };
     }
     case "add-new-Education": {
-      return {
-        ...cvState,
-        cvDetails: {
-          ...cvState.cvDetails,
-          education: [
-            ...cvState.cvDetails.education,
-            { ...cvState.newEducation, id: uuidv4() },
-          ],
-        },
-        newEducation: new Education("", "", "", "", ""),
-      };
+      const id = cvState.newEducation.id;
+
+      // Check if there's an existing education item with the same ID
+      const existingIndex = cvState.cvDetails.education.findIndex(
+        (ed) => ed.id === id
+      );
+
+      if (existingIndex !== -1) {
+        // If exists, replace the item at the found index
+        const updatedEducation = [...cvState.cvDetails.education];
+        updatedEducation[existingIndex] = {
+          ...cvState.newEducation,
+        };
+
+        return {
+          ...cvState,
+          cvDetails: {
+            ...cvState.cvDetails,
+            education: updatedEducation,
+          },
+          newEducation: new Education("", "", "", "", ""),
+        };
+      } else {
+        // If not exists, add a new education item
+        return {
+          ...cvState,
+          cvDetails: {
+            ...cvState.cvDetails,
+            education: [
+              ...cvState.cvDetails.education,
+              { ...cvState.newEducation, id: uuidv4() },
+            ],
+          },
+          newEducation: new Education("", "", "", "", ""),
+        };
+      }
     }
+
     case "update-Experience": {
       return {
         ...cvState,
@@ -106,17 +132,38 @@ export default function cvReducer(cvState, action) {
       };
     }
     case "add-new-Experience": {
-      return {
-        ...cvState,
-        cvDetails: {
-          ...cvState.cvDetails,
-          experience: [
-            ...cvState.cvDetails.experience,
-            { ...cvState.newExperience, id: uuidv4() },
-          ],
-        },
-        newExperience: new Experience("", "", "", "", ""),
-      };
+      const id = cvState.newExperience.id;
+
+      // Check if there's an existing experience item with the same ID
+      const existingIndex = cvState.cvDetails.experience.findIndex(
+        (ex) => ex.id === id
+      );
+      if (existingIndex !== -1) {
+        const updatedExperience = [...cvState.cvDetails.experience];
+        updatedExperience[existingIndex] = {
+          ...cvState.newExperience,
+        };
+        return {
+          ...cvState,
+          cvDetails: {
+            ...cvState.cvDetails,
+            experience: updatedExperience,
+          },
+          newExperience: new Experience("", "", "", "", ""),
+        };
+      } else {
+        return {
+          ...cvState,
+          cvDetails: {
+            ...cvState.cvDetails,
+            experience: [
+              ...cvState.cvDetails.experience,
+              { ...cvState.newExperience, id: uuidv4() },
+            ],
+          },
+          newExperience: new Experience("", "", "", "", ""),
+        };
+      }
     }
     case "delete-Education": {
       const educationIdToDelete = action.id;
@@ -155,17 +202,34 @@ export default function cvReducer(cvState, action) {
       };
     }
     case "add-new-Skill": {
-      return {
-        ...cvState,
-        cvDetails: {
-          ...cvState.cvDetails,
-          skills: [
-            ...cvState.cvDetails.skills,
-            { ...cvState.skill, id: uuidv4() },
-          ],
-        },
-        skill: new Skill(""),
-      };
+      const id = cvState.skill.id;
+      const existingIndex = cvState.cvDetails.skills.findIndex(
+        (skill) => skill.id === id
+      );
+      if (existingIndex !== -1) {
+        const updatedSkills = [...cvState.cvDetails.skills];
+        updatedSkills[existingIndex] = { ...cvState.skill };
+        return {
+          ...cvState,
+          cvDetails: {
+            ...cvState.cvDetails,
+            skills: updatedSkills,
+          },
+          skill: new Skill(""),
+        };
+      } else {
+        return {
+          ...cvState,
+          cvDetails: {
+            ...cvState.cvDetails,
+            skills: [
+              ...cvState.cvDetails.skills,
+              { ...cvState.skill, id: uuidv4() },
+            ],
+          },
+          skill: new Skill(""),
+        };
+      }
     }
     case "delete-Skill": {
       const skillIdToDelete = action.id;
@@ -177,6 +241,22 @@ export default function cvReducer(cvState, action) {
         cvDetails: {
           ...cvState.cvDetails,
           skills: updatedSkills,
+        },
+      };
+    }
+    case "edit": {
+      const id = action.id;
+      const property = action.property;
+      const itemToEdit = cvState.cvDetails[property].find(
+        (item) => item.id === id
+      );
+
+      return {
+        ...cvState,
+        [property === "skills"
+          ? "skill"
+          : `new${property.charAt(0).toUpperCase()}${property.slice(1)}`]: {
+          ...itemToEdit,
         },
       };
     }
