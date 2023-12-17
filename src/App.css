@@ -77,18 +77,18 @@ body {
 .headingForm {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  width: fit-content;
+  padding: 10px;
+  width: 250px;
+  justify-content: space-between;
 }
 .formExpandBtn {
-  border-radius: 50%;
   width: min-content;
   height: min-content;
   gap: 0;
   border: none;
-  padding: 0 2%;
   background: transparent;
-  border: 1px solid black;
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 fieldset {
