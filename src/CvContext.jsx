@@ -177,6 +177,7 @@ export default function cvReducer(cvState, action) {
           ...cvState.cvDetails,
           education: updatedEducation,
         },
+        newEducation: new Education("", "", "", "", ""),
       };
     }
     case "delete-Experience": {
@@ -190,6 +191,7 @@ export default function cvReducer(cvState, action) {
           ...cvState.cvDetails,
           experience: updatedExperience,
         },
+        newExperience: new Experience("", "", "", "", ""),
       };
     }
     case "update-Skill": {
@@ -242,6 +244,7 @@ export default function cvReducer(cvState, action) {
           ...cvState.cvDetails,
           skills: updatedSkills,
         },
+        skill: new Skill(""),
       };
     }
     case "edit": {

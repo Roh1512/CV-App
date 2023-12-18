@@ -414,7 +414,7 @@ function ListDiv({ details, onClick, displayProp, onEdit, setEdit }) {
   return (
     <>
       {details.map((detail) => (
-        <div key={detail.id} className="detailsBtn">
+        <div key={detail.id} className={"detailsBtn"}>
           <h4 className="listDisplayText">{detail[displayProp]}</h4>
           <div className="listButtons">
             <button
@@ -426,7 +426,13 @@ function ListDiv({ details, onClick, displayProp, onEdit, setEdit }) {
             >
               <i className="bi bi-pen"></i>
             </button>
-            <button onClick={() => onClick(detail.id)} className="listBtn">
+            <button
+              onClick={() => {
+                onClick(detail.id);
+                setEdit(false);
+              }}
+              className="listBtn"
+            >
               <i className="bi bi-x-circle"></i>
             </button>
           </div>
