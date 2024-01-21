@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useCvState } from "./CvContext";
 export default function CVDisplay() {
   const cvState = useCvState();
@@ -113,3 +114,10 @@ function Details({ details, heading, mainProp, prop2, prop3 }) {
     </>
   );
 }
+Details.propTypes = {
+  details: PropTypes.arrayOf(PropTypes.object).isRequired,
+  heading: PropTypes.string,
+  mainProp: PropTypes.string,
+  prop2: PropTypes.string,
+  prop3: PropTypes.string,
+};

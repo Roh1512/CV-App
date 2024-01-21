@@ -1,5 +1,3 @@
-import cvicon from "/cvicon.svg";
-
 import "./App.css";
 import TopNav from "./TopNav";
 import CVDiv from "./CVdiv";

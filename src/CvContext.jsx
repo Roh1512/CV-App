@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { createContext, useContext, useReducer } from "react";
 import { v4 as uuidv4 } from "uuid";
 const CvDetailsContext = createContext(null);
@@ -48,7 +49,7 @@ const initialState = {
   skill: new Skill(""),
 };
 
-export function CvProvider({ children }) {
+function CvProvider({ children }) {
   const [cvState, dispatch] = useReducer(cvReducer, initialState);
   return (
     <CvDetailsContext.Provider value={cvState}>
@@ -58,15 +59,29 @@ export function CvProvider({ children }) {
     </CvDetailsContext.Provider>
   );
 }
+CvDetailsContext.propTypes = {
+  // Ensure that children is a valid React node
+  children: PropTypes.node.isRequired,
+};
 
-export function useCvState() {
+CvDispatchContext.propTypes = {
+  // Ensure that children is a valid React node
+  children: PropTypes.node.isRequired,
+};
+
+CvProvider.propTypes = {
+  // Ensure that children is a valid React node
+  children: PropTypes.node.isRequired,
+};
+
+function useCvState() {
   return useContext(CvDetailsContext);
 }
-export function useCvDispatch() {
+function useCvDispatch() {
   return useContext(CvDispatchContext);
 }
 
-export default function cvReducer(cvState, action) {
+function cvReducer(cvState, action) {
   switch (action.type) {
     case "set-personal-details": {
       return {
@@ -267,3 +282,6 @@ export default function cvReducer(cvState, action) {
       return cvState;
   }
 }
+
+export { CvProvider, useCvState, useCvDispatch };
+export default cvReducer;

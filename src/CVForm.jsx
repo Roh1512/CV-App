@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 // CVForm.jsx
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { useCvDispatch, useCvState } from "./CvContext";
 export default function CVForm() {
@@ -389,6 +389,14 @@ function Input({ handleChange, prop, type, placeHolder, pattern, value }) {
     </>
   );
 }
+Input.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  prop: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  placeHolder: PropTypes.string.isRequired,
+  pattern: PropTypes.string, // Add if pattern is used
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+};
 
 function TextArea({ handleChange, prop, placeHolder, pattern, value }) {
   return (
@@ -410,6 +418,15 @@ function TextArea({ handleChange, prop, placeHolder, pattern, value }) {
     </>
   );
 }
+
+TextArea.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  prop: PropTypes.string.isRequired,
+  placeHolder: PropTypes.string.isRequired,
+  pattern: PropTypes.string, // Add if pattern is used
+  value: PropTypes.string.isRequired,
+};
+
 function ListDiv({ details, onClick, displayProp, onEdit, setEdit }) {
   return (
     <>
@@ -441,3 +458,10 @@ function ListDiv({ details, onClick, displayProp, onEdit, setEdit }) {
     </>
   );
 }
+ListDiv.propTypes = {
+  details: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onClick: PropTypes.func.isRequired,
+  displayProp: PropTypes.string.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  setEdit: PropTypes.func.isRequired,
+};

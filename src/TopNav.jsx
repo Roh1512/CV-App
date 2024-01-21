@@ -5,7 +5,7 @@ export default function TopNav() {
       <nav className="navBar">
         <div className="downloadBtns">
           <DownloadImage divId={"CVdisplay"} fileName={"CV Image"} />
-          <DownloadPDF divId={"CVdisplay"} fileName={"CV Image"} />
+          <DownloadPDF divId={"CVdisplay"} fileName={"CV Pdf"} />
         </div>
       </nav>
     </>

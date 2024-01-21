@@ -1,5 +1,6 @@
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
+import PropTypes from "prop-types";
 
 function DownloadPDF({ divId, fileName }) {
   function downloadPDF(myDiv, fileName) {
@@ -33,6 +34,10 @@ function DownloadPDF({ divId, fileName }) {
     </button>
   );
 }
+DownloadPDF.propTypes = {
+  divId: PropTypes.string,
+  fileName: PropTypes.string,
+};
 
 function DownloadImage({ divId, fileName }) {
   function downloadImage(myDiv, fileName) {
@@ -61,5 +66,9 @@ function DownloadImage({ divId, fileName }) {
     </button>
   );
 }
+DownloadImage.propTypes = {
+  divId: PropTypes.string,
+  fileName: PropTypes.string,
+};
 
 export { DownloadImage, DownloadPDF };
